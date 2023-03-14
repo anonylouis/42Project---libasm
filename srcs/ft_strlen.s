@@ -1,7 +1,5 @@
 segment .data
-
 segment .bss
-
 segment .text
 	global ft_strlen
 	ft_strlen:

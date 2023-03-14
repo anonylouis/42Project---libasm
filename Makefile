@@ -2,7 +2,7 @@
 NAME = libasm.a
 
 SRCS_DIR = ./srcs/
-SRCS = ft_strlen.s
+SRCS = ft_strlen.s ft_strcmp.s
 
 OBJS_DIR = ./objs/
 OBJECTS = ${SRCS:.s=.o}
