@@ -2,6 +2,7 @@
 #include "libasm.h"
 #include <string.h>
 #include <stdlib.h>
+#include <errno.h>
 
 # define RESET "\033[00m"
 
@@ -62,6 +63,28 @@ int main(int argc, char **argv)
 		free(str5);
 		free(str6);
 	}
+	else if (!ft_strcmp(argv[1], "ft_strcpy")) {
+		printf("%sTEST -- FT_STRCMP %s\n\n", RED, RESET);
+
+		char *src1 = "A short sentence";
+		char *src2 = "A longer sentence with the whole alphabet abcdefghijklmnopqrstuvwxyz";
+		char *src3 = "In the same destination ??";
+		char *src4 = "";
+		
+		char dest1[100] = "abcdefg";
+		char dest2[100] = "abcdefg";
+		
+		char dest3[100] = "hijklmnop";
+		char dest4[100] = "hijklmnop";
+
+		char dest5[100] = "qrstuvwxyz";
+		char dest6[1000] = "qrstuvwxyz";
+
+		printf("%s -ft_strcpy%s and %sstrcpy%s of \"%s\" : %s%s%s and %s%s%s\n\n", GREEN, RESET, BLUE, RESET, src1, GREEN, ft_strcpy(dest1, src1), RESET, BLUE, strcpy(dest2, src1), RESET);
+		printf("%s -ft_strcpy%s and %sstrcpy%s of \"%s\" : %s%s%s and %s%s%s\n\n", GREEN, RESET, BLUE, RESET, src2, GREEN, ft_strcpy(dest3, src2), RESET, BLUE, strcpy(dest4, src2), RESET);
+		printf("%s -ft_strcpy%s and %sstrcpy%s of \"%s\" : %s%s%s and %s%s%s\n\n", GREEN, RESET, BLUE, RESET, src3, GREEN, ft_strcpy(dest3, src3), RESET, BLUE, strcpy(dest4, src3), RESET);
+		printf("%s -ft_strcpy%s and %sstrcpy%s of \"%s\" : %s%s%s and %s%s%s\n\n", GREEN, RESET, BLUE, RESET, src3, GREEN, ft_strcpy(dest5, src4), RESET, BLUE, strcpy(dest6, src4), RESET);
+	}
 	else if (!ft_strcmp(argv[1], "ft_strcmp")) {
 		printf("%sTEST -- FT_STRCMP %s\n\n", RED, RESET);
 
@@ -81,6 +104,34 @@ int main(int argc, char **argv)
 		printf("%s -ft_strcmp%s and %sstrcmp%s of \"%s\" and \"%s\": %s%d%s and %s%d%s\n\n", GREEN, RESET, BLUE, RESET, str11, str8, GREEN, ft_strcmp(str11, str8), RESET, BLUE, strcmp(str11, str8), RESET);
 		printf("%s -ft_strcmp%s and %sstrcmp%s of \"%s\" and \"%s\": %s%d%s and %s%d%s\n\n", GREEN, RESET, BLUE, RESET, str8, str8, GREEN, ft_strcmp(str8, str8), RESET, BLUE, strcmp(str8, str8), RESET);
 		printf("%s -ft_strcmp%s and %sstrcmp%s of \"%s\" and \"%s\": %s%d%s and %s%d%s\n\n", GREEN, RESET, BLUE, RESET, str8, str11, GREEN, ft_strcmp(str8, str11), RESET, BLUE, strcmp(str8, str11), RESET);
+	}
+	else if (!ft_strcmp(argv[1], "ft_write")) {
+		printf("%sTEST -- FT_WRITE %s\n\n", RED, RESET);
+		
+		printf("%s -Working cases :%s\n\n", GREEN, RESET);
+		printf("%ld/39\n\n", ft_write(1, "I m writing something with ft_write : ", 39));
+
+		printf("%ld/23\n\n", ft_write(1, "Cutting the sentence : ABCDEFGHIJKLMNOP", 23));
+
+		printf("%ld/16\n\n", ft_write(2, "On stdout.... : ", 16));
+
+		printf("Empty : %ld/0\n\n", ft_write(2, "", 0));
+
+		printf("%s -Error cases :%s\n\n", GREEN, RESET);
+
+		printf("%sft_write%s : Wrong file descriptor : %ld\n", GREEN, RESET, ft_write(42, "test", 4));
+		printf("%serrno = %d%s\n\n", ITALIC, errno, RESET);
+		printf("%swrite%s : Wrong file descriptor : %ld\n", BLUE, RESET, write(42, "test", 4));
+		printf("%serrno = %d%s\n\n", ITALIC, errno, RESET);
+
+		int fd1 = open("/dev/full", O_WRONLY);
+		if (fd1 > 0) {
+			printf("%sft_write%s : No space left : %ld\n", GREEN, RESET, ft_write(fd1, "test", 4));
+			printf("%serrno = %d%s\n\n", ITALIC, errno, RESET);
+			printf("%swrite%s : No space left : %ld\n", BLUE, RESET, write(fd1, "test", 4));
+			printf("%serrno = %d%s\n\n", ITALIC, errno, RESET);
+			close(fd1);
+		}
 	}
 	else {
 		printf("%sNo test for %s %s\n", RED, argv[1], RESET);
