@@ -4,10 +4,10 @@ segment .data
 segment .bss
 	
 segment .text
-	global ft_write
+	global ft_read
 	
-	ft_write:
-		mov rax, 1 ; syscall 1 = write
+	ft_read:
+		mov rax, 0 ; syscall 0 = read
 		syscall
 		cmp rax, 0
 		jge end

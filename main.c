@@ -109,12 +109,10 @@ int main(int argc, char **argv)
 		printf("%sTEST -- FT_WRITE %s\n\n", RED, RESET);
 		
 		printf("%s -Working cases :%s\n\n", GREEN, RESET);
+
 		printf("%ld/39\n\n", ft_write(1, "I m writing something with ft_write : ", 39));
-
 		printf("%ld/23\n\n", ft_write(1, "Cutting the sentence : ABCDEFGHIJKLMNOP", 23));
-
 		printf("%ld/16\n\n", ft_write(2, "On stdout.... : ", 16));
-
 		printf("Empty : %ld/0\n\n", ft_write(2, "", 0));
 
 		printf("%s -Error cases :%s\n\n", GREEN, RESET);
@@ -123,7 +121,6 @@ int main(int argc, char **argv)
 		printf("%serrno = %d%s\n\n", ITALIC, errno, RESET);
 		printf("%swrite%s : Wrong file descriptor : %ld\n", BLUE, RESET, write(42, "test", 4));
 		printf("%serrno = %d%s\n\n", ITALIC, errno, RESET);
-
 		int fd1 = open("/dev/full", O_WRONLY);
 		if (fd1 > 0) {
 			printf("%sft_write%s : No space left : %ld\n", GREEN, RESET, ft_write(fd1, "test", 4));
@@ -131,6 +128,42 @@ int main(int argc, char **argv)
 			printf("%swrite%s : No space left : %ld\n", BLUE, RESET, write(fd1, "test", 4));
 			printf("%serrno = %d%s\n\n", ITALIC, errno, RESET);
 			close(fd1);
+		}
+	}
+	else if (!ft_strcmp(argv[1], "ft_read")) {
+		int fd2 = open("./Makefile", O_RDONLY);
+		int fd3 = open("./Makefile", O_RDONLY);
+		if (fd2 > 0 && fd3 > 0) {
+			printf("%sTEST -- FT_READ %s\n\n", RED, RESET);
+			
+			printf("%s -Working cases :%s\n\n", GREEN, RESET);
+		
+			char buf1[40];
+			char buf2[40];
+
+			ssize_t r1 = ft_read(fd2, buf1,16);
+			ssize_t r2 = read(fd3, buf2,16);
+			buf1[r1] = '\0';
+			buf2[r2] = '\0';
+
+			printf("ft_read reading 16 char from Makefile (return = %ld): %s\n\n", r1, buf1);
+			printf("read reading 16 char from Makefile (return = %ld): %s\n\n", r2, buf2);
+
+			printf("%s -Error cases :%s\n\n", GREEN, RESET);
+
+			printf("%sft_read%s : Wrong file descriptor : %ld\n", GREEN, RESET, ft_read(-2, buf1, 1));
+			printf("%serrno = %d%s\n\n", ITALIC, errno, RESET);
+			printf("%sread%s : Wrong file descriptor : %ld\n", BLUE, RESET, read(-2, buf2, 1));
+			printf("%serrno = %d%s\n\n", ITALIC, errno, RESET);
+
+			int fd4 = open("./srcs/", O_RDONLY);
+			printf("%sft_read%s : Is a directory : %ld\n", GREEN, RESET, ft_read(fd4, buf1, 1));
+			printf("%serrno = %d%s\n\n", ITALIC, errno, RESET);
+			printf("%sread%s : Is a directory : %ld\n", BLUE, RESET, read(fd4, buf2, 1));
+			printf("%serrno = %d%s\n\n", ITALIC, errno, RESET);
+
+			close(fd2);
+			close(fd3);
 		}
 	}
 	else {
