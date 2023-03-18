@@ -166,6 +166,74 @@ int main(int argc, char **argv)
 			close(fd3);
 		}
 	}
+	else if (!ft_strcmp(argv[1], "ft_strdup")) {
+
+		printf("%sTEST -- FT_STRDUP %s\n\n", RED, RESET);
+
+		char *str12 = "A true copy !";
+		char *str13 = "";
+		char *str14 = "A more more more more more more more longer sentence!!";
+		char *str15 = NULL;
+
+		char *dup1 = ft_strdup(str12);
+		char *dup2 = ft_strdup(str13);
+		char *dup3 = ft_strdup(str14);
+		char *dup4 = ft_strdup(str15);
+
+		if (dup1) {
+			printf("%s -ft_strdup%s of \"%s\" : %s%s%s\n\n", GREEN, RESET,  str12, GREEN, dup1, RESET);
+			free(dup1);
+		}
+		else
+			printf("%s -ft_strdup%s failed\n", GREEN, RESET);
+
+		if (dup2) {
+			printf("%s -ft_strdup%s of \"%s\" : %s%s%s\n\n", GREEN, RESET,  str13, GREEN, dup2, RESET);
+			free(dup2);
+		}
+		else
+			printf("%s -ft_strdup%s failed\n", GREEN, RESET);
+
+		if (dup3) {
+			printf("%s -ft_strdup%s of \"%s\" : %s%s%s\n\n", GREEN, RESET,  str14, GREEN, dup3, RESET);
+			free(dup3);
+		}
+		else
+			printf("%s -ft_strdup%s failed\n", GREEN, RESET);
+
+		if (!dup4) {
+			printf("%s -ft_strdup%s failed cause s = \"%s\" : %s%s%s\n\n", GREEN, RESET, str15, GREEN, dup4, RESET);
+		}
+
+	}
+	else if (!ft_strcmp(argv[1], "ft_atoi_base")) {
+
+		printf("%sTEST -- FT_ATOI_BASE %s\n\n", RED, RESET);
+			
+		printf("%s -Working cases :%s\n\n", GREEN, RESET);
+
+		char *str16 = " \t \t  \f\n\r  +++---++-+-+-101010HELLO";
+		char *str17 = " \t \t  \f\n\r  +++---++-+-+2aHELLO";
+		char *str18 = " \t \t  \f\n\r  +++---++-+-+-52HELLO";
+		char *str19 = " \t \t  \f\n\r  +++--++-+-+-oiu ";
+
+		printf(" - binary base : %d\n", ft_atoi_base(str16, "01"));
+		printf(" - hexa   base : %d\n", ft_atoi_base(str17, "0123456789abcdef"));
+		printf(" - octal  base : %d\n", ft_atoi_base(str18, "01234567"));
+		printf(" - custom base : %d\n", ft_atoi_base(str19, "louis"));
+
+
+		printf("\n%s -Error cases :%s\n\n", GREEN, RESET);
+
+		printf(" - invalid base (too short)   : %d\n", ft_atoi_base("99", "9"));
+		printf(" - invalid base (too short)   : %d\n", ft_atoi_base("99", "9"));
+		printf(" - invalid base (duplicate)   : %d\n", ft_atoi_base("12", "01233"));
+		printf(" - invalid base (space char)  : %d\n", ft_atoi_base("123", "0123 "));
+		printf(" - invalid base (space char)  : %d\n", ft_atoi_base("123", "0123 "));
+		printf(" - invalid base (+ or - char) : %d\n", ft_atoi_base("123", "0123-"));
+
+
+	}
 	else {
 		printf("%sNo test for %s %s\n", RED, argv[1], RESET);
 		printf("functions available : ft_strlen, ft_strcpy, ft_strcmp\n");
