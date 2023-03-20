@@ -32,5 +32,5 @@ segment .text
 
 		mov [rdi], rax ; new begin
 
-		end :
+		end:
 			ret

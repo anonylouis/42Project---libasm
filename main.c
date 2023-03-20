@@ -23,7 +23,7 @@ t_list	*ft_lstnew(void *data)
 	return (new_elem);
 }
 
-void	print_lst(t_list *begin_list)
+void	print_lst_str(t_list *begin_list)
 {
 	printf("---------\n");
 	while(begin_list) {
@@ -33,6 +33,20 @@ void	print_lst(t_list *begin_list)
 	printf("---------\n");
 }
 
+void	print_lst_int(t_list *begin_list)
+{
+	printf("---------\n");
+	while(begin_list) {
+		printf(" %p + content : %d (%p) \n", begin_list, *((int *) begin_list->data), begin_list->data);
+		begin_list = begin_list->next;
+	}
+	printf("---------\n");
+}
+
+int comp(void *a, void *b)
+{
+	return (*((int *)b) - *((int *)a));
+}
 
 int main(int argc, char **argv)
 {
@@ -256,8 +270,11 @@ int main(int argc, char **argv)
 	else if (!ft_strcmp(argv[1], "list")) {
 		printf("%sTEST -- LIST FUNCTIONS %s\n\n", RED, RESET);
 
+		/*printf("WITH STRINGS :\n");
 		t_list *base = NULL;
-		printf("size = %d\n", ft_list_size(base));
+		printf("ft_list_size = %d\n\n", ft_list_size(base));
+
+		printf(" - ft_list_push_front some elements :\n");
 
 		ft_list_push_front(&base, "ZERO");
 		ft_list_push_front(&base, "-");
@@ -266,14 +283,33 @@ int main(int argc, char **argv)
 		ft_list_push_front(&base, "ET DEUX");
 		ft_list_push_front(&base, "ET UN");
 
-		print_lst(base);
+		print_lst_str(base);
 
 		//should not crash
 		ft_list_push_front(NULL, "ET UN");
 
-		printf("size = %d\n", ft_list_size(base));
+		printf("ft_list_size = %d\n\n", ft_list_size(base));
 		
-		
+
+		printf(" - ft_list_sort :\n");
+		ft_list_sort(&base, ft_strcmp);
+		print_lst_str(base);*/
+
+		printf("\nWITH NUMBERS :\n");
+		t_list *base2 = NULL;
+		int a=1, b=2, c=3, d=4, e=5, f=6, g=7, h=8;
+		ft_list_push_front(&base2, &a);
+		ft_list_push_front(&base2, &h);
+		ft_list_push_front(&base2, &f);
+		ft_list_push_front(&base2, &c);
+		ft_list_push_front(&base2, &b);
+		ft_list_push_front(&base2, &g);
+		ft_list_push_front(&base2, &e);
+		print_lst_int(base2);
+		printf("ft_list_size = %d\n\n", ft_list_size(base2));	
+		printf(" - ft_list_sort :\n");
+		ft_list_sort(&base2, comp);
+		print_lst_int(base2);
 
 	}
 	else {
