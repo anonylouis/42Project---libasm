@@ -5,14 +5,34 @@
 #include <errno.h>
 
 # define RESET "\033[00m"
-
 # define ITALIC "\033[3m"
-# define bold "\033[1m"
-# define underline "\033[4m"
-
 # define RED "\033[1;31m"
 # define GREEN "\033[1;32m"
 # define BLUE "\033[1;34m"
+
+
+t_list	*ft_lstnew(void *data)
+{
+	t_list	*new_elem;
+
+	new_elem = malloc(sizeof(t_list));
+	if (new_elem == NULL)
+		return (NULL);
+	new_elem->next = NULL;
+	new_elem->data = data;
+	return (new_elem);
+}
+
+void	print_lst(t_list *begin_list)
+{
+	printf("---------\n");
+	while(begin_list) {
+		printf("content : %s\n", (char *) begin_list->data);
+		begin_list = begin_list->next;
+	}
+	printf("---------\n");
+}
+
 
 int main(int argc, char **argv)
 {
@@ -232,6 +252,22 @@ int main(int argc, char **argv)
 		printf(" - invalid base (space char)  : %d\n", ft_atoi_base("123", "0123 "));
 		printf(" - invalid base (+ or - char) : %d\n", ft_atoi_base("123", "0123-"));
 
+	}
+	else if (!ft_strcmp(argv[1], "list")) {
+		printf("%sTEST -- LIST FUNCTIONS %s\n\n", RED, RESET);
+
+		t_list *base = NULL;
+		ft_list_push_front(&base, "ZERO");
+		ft_list_push_front(&base, "-");
+		ft_list_push_front(&base, "TROIS");
+		ft_list_push_front(&base, "ET");
+		ft_list_push_front(&base, "ET DEUX");
+		ft_list_push_front(&base, "ET UN");
+
+		print_lst(base);
+
+		//should not crash
+		ft_list_push_front(NULL, "ET UN");
 
 	}
 	else {

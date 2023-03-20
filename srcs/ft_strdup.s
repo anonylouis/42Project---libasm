@@ -24,12 +24,12 @@ segment .text
 
 		sub rsp, 0x28 ; shadow space + 16-bytes aligned
 		call malloc wrt ..plt
-		add rsp, 0x28 
+		add rsp, 0x28
 		pop rcx
 		pop rsi	
 
 		cmp rax, 0
-		jz end
+		je end ; malloc failed
 
 		mov rdi, rax
 		rep movsb
