@@ -257,6 +257,8 @@ int main(int argc, char **argv)
 		printf("%sTEST -- LIST FUNCTIONS %s\n\n", RED, RESET);
 
 		t_list *base = NULL;
+		printf("size = %d\n", ft_list_size(base));
+
 		ft_list_push_front(&base, "ZERO");
 		ft_list_push_front(&base, "-");
 		ft_list_push_front(&base, "TROIS");
@@ -268,6 +270,10 @@ int main(int argc, char **argv)
 
 		//should not crash
 		ft_list_push_front(NULL, "ET UN");
+
+		printf("size = %d\n", ft_list_size(base));
+		
+		
 
 	}
 	else {
