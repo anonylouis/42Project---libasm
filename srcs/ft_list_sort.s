@@ -4,6 +4,8 @@ segment .text
 	global ft_list_sort
 	
 	ft_list_sort:
+		test rdi, rdi
+		jz .end
 		mov rdi, [rdi]
 		mov r9, rdi ; r9 = base_ptr
 		mov rcx, rsi ; rcx = comp fct

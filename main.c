@@ -285,12 +285,8 @@ int main(int argc, char **argv)
 
 		print_lst_str(base);
 
-		//should not crash
-		ft_list_push_front(NULL, "ET UN");
-
 		printf("ft_list_size = %d\n\n", ft_list_size(base));
 		
-
 		printf(" - ft_list_sort :\n");
 		ft_list_sort(&base, ft_strcmp);
 		print_lst_str(base);
@@ -310,6 +306,10 @@ int main(int argc, char **argv)
 		printf(" - ft_list_sort :\n");
 		ft_list_sort(&base2, comp);
 		print_lst_int(base2);
+
+		//should not crash
+		ft_list_push_front(NULL, "ET UN");
+		ft_list_sort(NULL, comp);
 
 	}
 	else {
