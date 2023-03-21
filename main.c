@@ -367,6 +367,8 @@ int main(int argc, char **argv)
 		ft_list_sort(NULL, int_comp);
 		ft_list_sort(&base2, NULL);
 		ft_list_sort(&base, NULL);
+		ft_list_remove_if(&base, &len_to_remove, NULL, free);
+		ft_list_remove_if(&base2, &h, NULL, NULL);
 
 		//clear
 		clear_lst(base, NULL);
