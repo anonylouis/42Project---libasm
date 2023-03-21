@@ -25,27 +25,49 @@ t_list	*ft_lstnew(void *data)
 
 void	print_lst_str(t_list *begin_list)
 {
-	printf("---------\n");
+	printf("\n------- size = %d -------\n", ft_list_size(begin_list));
 	while(begin_list) {
-		printf("content : %s\n", (char *) begin_list->data);
+		printf(" -Content : %s\n", (char *) begin_list->data);
 		begin_list = begin_list->next;
 	}
-	printf("---------\n");
+	printf("------------------------\n\n");
 }
 
 void	print_lst_int(t_list *begin_list)
 {
-	printf("---------\n");
+
+	printf("\n------- size = %d -------\n", ft_list_size(begin_list));
 	while(begin_list) {
-		printf(" %p + content : %d\n", begin_list, *((int *) begin_list->data));
+		printf(" -Content : %d\n", *((int *) begin_list->data));
 		begin_list = begin_list->next;
 	}
-	printf("---------\n");
+	printf("------------------------\n\n");
 }
 
 int comp(void *a, void *b)
 {
 	return (*((int *)a) - *((int *)b));
+}
+
+int is_bigger(void *a, void *b)
+{
+	return (*((int *)a) < *((int *)b));
+}
+
+void clear_lst(t_list *base, void (*free_fct)(void *))
+{
+	if (base) {
+		if (free_fct)
+			free_fct(base->data);
+		clear_lst(base->next, free_fct);
+		free(base);
+	}
+
+}
+
+int len_equal(void *a, void *b)
+{
+	return !(ft_strlen((char *)a) == *((int *)b));
 }
 
 int main(int argc, char **argv)
@@ -270,46 +292,78 @@ int main(int argc, char **argv)
 	else if (!ft_strcmp(argv[1], "list")) {
 		printf("%sTEST -- LIST FUNCTIONS %s\n\n", RED, RESET);
 
-		printf("WITH STRINGS :\n");
+		printf("%s\nWITH STRINGS :%s\n\n", RED, RESET);
 		t_list *base = NULL;
-		printf("ft_list_size = %d\n\n", ft_list_size(base));
+		char *str20 = calloc(sizeof(char), 2);
+		char *str21 = calloc(sizeof(char), 2);
+		char *str22 = calloc(sizeof(char), 2);
+		char *str23 = calloc(sizeof(char), 2);
+		char *str24 = calloc(sizeof(char), 2);
+		char *str25 = calloc(sizeof(char), 2);
+		str20[0] = 'a';
+		str21[0] = 'b';
+		str22[0] = 'c';
+		str23[0] = 'd';
+		str24[0] = 'e';
+		str25[0] = 'f';
+		int len_to_remove = 1;
 
-		printf(" - ft_list_push_front some elements :\n");
-
+		printf("%s - ft_list_push_front :%s\n", GREEN, RESET);
+		ft_list_push_front(&base, str20);
 		ft_list_push_front(&base, "ZERO");
-		ft_list_push_front(&base, "-");
+		ft_list_push_front(&base, str21);
+		ft_list_push_front(&base, "---");
+		ft_list_push_front(&base, str22);
+		ft_list_push_front(&base, str23);
 		ft_list_push_front(&base, "TROIS");
 		ft_list_push_front(&base, "ET");
+		ft_list_push_front(&base, str24);
 		ft_list_push_front(&base, "ET DEUX");
 		ft_list_push_front(&base, "ET UN");
-
+		ft_list_push_front(&base, str25);
 		print_lst_str(base);
 
-		printf("ft_list_size = %d\n\n", ft_list_size(base));
+		printf("%s - ft_list_remove_if is_bigger than 8 :%s\n", GREEN, RESET);
+		ft_list_remove_if(&base, &len_to_remove, len_equal, free);
+		print_lst_str(base);
+
 		
-		printf(" - ft_list_sort :\n");
+		printf("%s - ft_list_sort :%s\n", GREEN, RESET);
 		ft_list_sort(&base, ft_strcmp);
 		print_lst_str(base);
 
-		printf("\nWITH NUMBERS :\n");
+		printf("%s\nWITH NUMBERS :%s\n\n", RED, RESET);
 		t_list *base2 = NULL;
-		int a=1, b=2, c=3, d=4, e=5, f=6, g=7, h=8;
+		int a=1, b=2, c=3, d=4, e=5, f=6, g=7, h=8, i=9,j=10;
+
+		printf("%s - ft_list_push_front :%s\n", GREEN, RESET);
 		ft_list_push_front(&base2, &a);
+		ft_list_push_front(&base2, &d);
 		ft_list_push_front(&base2, &h);
 		ft_list_push_front(&base2, &f);
 		ft_list_push_front(&base2, &c);
 		ft_list_push_front(&base2, &b);
 		ft_list_push_front(&base2, &g);
 		ft_list_push_front(&base2, &e);
-		print_lst_int(base2);
-		printf("ft_list_size = %d\n\n", ft_list_size(base2));	
-		printf(" - ft_list_sort :\n");
-		ft_list_sort(&base2, comp);
+		ft_list_push_front(&base2, &i);
+		ft_list_push_front(&base2, &j);
 		print_lst_int(base2);
 
+		printf("%s - ft_list_remove_if is_bigger than 8 :%s\n", GREEN, RESET);
+		ft_list_remove_if(&base2, &h, is_bigger, NULL);
+		print_lst_int(base2);
+
+		printf("%s - ft_list_sort :%s\n", GREEN, RESET);
+		ft_list_sort(&base2, comp);
+		print_lst_int(base2);
+		
 		//should not crash
 		ft_list_push_front(NULL, "ET UN");
 		ft_list_sort(NULL, comp);
+
+		//clear
+		clear_lst(base, NULL);
+		clear_lst(base2, NULL);
 
 	}
 	else {

@@ -21,7 +21,7 @@ $(OBJS_DIR)%.o :	$(SRCS_DIR)%.s
 					nasm -f elf64 -o $@ $< 
 
 test :	$(NAME) $(SRC_TEST)
-		gcc $(SRC_TEST) $(NAME) -o test
+		gcc -g $(SRC_TEST) $(NAME) -o test
 
 malloc :	$(NAME) $(SRC_TEST)
 			gcc $(SRC_TEST) $(NAME) -o test
