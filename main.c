@@ -37,7 +37,7 @@ void	print_lst_int(t_list *begin_list)
 {
 	printf("---------\n");
 	while(begin_list) {
-		printf(" %p + content : %d (%p) \n", begin_list, *((int *) begin_list->data), begin_list->data);
+		printf(" %p + content : %d\n", begin_list, *((int *) begin_list->data));
 		begin_list = begin_list->next;
 	}
 	printf("---------\n");
@@ -45,7 +45,7 @@ void	print_lst_int(t_list *begin_list)
 
 int comp(void *a, void *b)
 {
-	return (*((int *)b) - *((int *)a));
+	return (*((int *)a) - *((int *)b));
 }
 
 int main(int argc, char **argv)
@@ -270,7 +270,7 @@ int main(int argc, char **argv)
 	else if (!ft_strcmp(argv[1], "list")) {
 		printf("%sTEST -- LIST FUNCTIONS %s\n\n", RED, RESET);
 
-		/*printf("WITH STRINGS :\n");
+		printf("WITH STRINGS :\n");
 		t_list *base = NULL;
 		printf("ft_list_size = %d\n\n", ft_list_size(base));
 
@@ -293,7 +293,7 @@ int main(int argc, char **argv)
 
 		printf(" - ft_list_sort :\n");
 		ft_list_sort(&base, ft_strcmp);
-		print_lst_str(base);*/
+		print_lst_str(base);
 
 		printf("\nWITH NUMBERS :\n");
 		t_list *base2 = NULL;

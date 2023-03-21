@@ -38,8 +38,8 @@ segment .text
 				pop rsi
 				pop rdi
 
-				test eax, eax
-				jnl .no_swap
+				cmp eax, 0
+				jl .no_swap
 
 				mov rax, [rsi]
 				mov r8, [rdx]
