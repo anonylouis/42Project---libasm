@@ -7,6 +7,8 @@ segment .text
 	ft_list_remove_if:
 		test rdi, rdi
 		jz .end
+		test rdx, rdx
+		jz .end
 		mov r8, [rdi]
 		test r8, r8
 		jz .end

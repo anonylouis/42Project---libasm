@@ -27,8 +27,8 @@ segment .text
 		jz end ; malloc failed
 
 		mov [rax], rsi ; set data
-		mov rbx, [rdi]
-		mov [rax + 0x8], rbx ; set next
+		mov rcx, [rdi]
+		mov [rax + 0x8], rcx ; set next
 
 		mov [rdi], rax ; new begin
 

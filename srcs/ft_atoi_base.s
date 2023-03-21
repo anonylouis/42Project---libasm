@@ -9,37 +9,37 @@ segment .text
 		
 		mov rax, 0 ; result
 		
-		mov rbx, 0 ; len_base
+		mov r8, 0 ; len_base
 		check_base:
 
-			cmp byte [rsi + rbx], 0
+			cmp byte [rsi + r8], 0
 			je is_valid_base
 
-			cmp byte [rsi + rbx], 32
+			cmp byte [rsi + r8], 32
 			je end
-			cmp byte [rsi + rbx], '+'
+			cmp byte [rsi + r8], '+'
 			je end
-			cmp byte [rsi + rbx], '-'
+			cmp byte [rsi + r8], '-'
 			je end
-			cmp byte [rsi + rbx], 9
+			cmp byte [rsi + r8], 9
 			jl check_base_valid_char
-			cmp byte [rsi + rbx], 13
+			cmp byte [rsi + r8], 13
 			jle end
 
 			check_base_valid_char:
-			mov dl, byte[rsi + rbx]
-			mov rcx, rbx
+			mov dl, byte[rsi + r8]
+			mov rcx, r8
 			doublon:
 				inc rcx
 				cmp byte [rsi + rcx], dl
 				je end ; invalid base
 				cmp byte [rsi + rcx], 0
 				jne doublon
-			inc rbx
+			inc r8
 			jmp check_base
 
 		is_valid_base:
-		cmp rbx, 1
+		cmp r8, 1
 		jle end
 		mov rcx, 0 ; sign
 		
@@ -83,7 +83,7 @@ segment .text
 				jmp in_base
 			
 			is_in_base:
-			mul rbx ; rbx = len
+			mul r8 ; r8 = len
 			add rax, rcx
 			inc rdi
 			jmp to_int

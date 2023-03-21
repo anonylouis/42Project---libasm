@@ -13,9 +13,12 @@ segment .text
 		jge end
 		; syscall failed + rax = -errno
 		neg rax
-		mov rbx, rax
+		push rax
+		sub rsp, 0x20
 		call __errno_location wrt ..plt ; rax = &errno
-		mov [rax], rbx
+		add rsp, 0x20
+		pop rcx
+		mov [rax], rcx
 		mov rax, -1
 
 		end:

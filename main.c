@@ -44,14 +44,19 @@ void	print_lst_int(t_list *begin_list)
 	printf("------------------------\n\n");
 }
 
-int comp(void *a, void *b)
-{
-	return (*((int *)a) - *((int *)b));
-}
-
 int is_bigger(void *a, void *b)
 {
 	return (*((int *)a) < *((int *)b));
+}
+
+int str_comp(void *a, void *b)
+{
+	return (ft_strcmp((char *) a, (char *) b) > 0);
+}
+
+int int_comp(void *a, void *b)
+{
+	return (*((int *)a) > *((int *)b));
 }
 
 void clear_lst(t_list *base, void (*free_fct)(void *))
@@ -173,9 +178,9 @@ int main(int argc, char **argv)
 
 		printf("%s -Error cases :%s\n\n", GREEN, RESET);
 
-		printf("%sft_write%s : Wrong file descriptor : %ld\n", GREEN, RESET, ft_write(42, "test", 4));
+		printf("%sft_write%s : Wrong file descriptor : %ld\n", GREEN, RESET, ft_write(-1, "test", 4));
 		printf("%serrno = %d%s\n\n", ITALIC, errno, RESET);
-		printf("%swrite%s : Wrong file descriptor : %ld\n", BLUE, RESET, write(42, "test", 4));
+		printf("%swrite%s : Wrong file descriptor : %ld\n", BLUE, RESET, write(-1, "test", 4));
 		printf("%serrno = %d%s\n\n", ITALIC, errno, RESET);
 		int fd1 = open("/dev/full", O_WRONLY);
 		if (fd1 > 0) {
@@ -329,7 +334,7 @@ int main(int argc, char **argv)
 
 		
 		printf("%s - ft_list_sort :%s\n", GREEN, RESET);
-		ft_list_sort(&base, ft_strcmp);
+		ft_list_sort(&base, str_comp);
 		print_lst_str(base);
 
 		printf("%s\nWITH NUMBERS :%s\n\n", RED, RESET);
@@ -354,12 +359,14 @@ int main(int argc, char **argv)
 		print_lst_int(base2);
 
 		printf("%s - ft_list_sort :%s\n", GREEN, RESET);
-		ft_list_sort(&base2, comp);
+		ft_list_sort(&base2, int_comp);
 		print_lst_int(base2);
 		
 		//should not crash
 		ft_list_push_front(NULL, "ET UN");
-		ft_list_sort(NULL, comp);
+		ft_list_sort(NULL, int_comp);
+		ft_list_sort(&base2, NULL);
+		ft_list_sort(&base, NULL);
 
 		//clear
 		clear_lst(base, NULL);

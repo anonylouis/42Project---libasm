@@ -6,6 +6,8 @@ segment .text
 	ft_list_sort:
 		test rdi, rdi
 		jz .end
+		test rsi, rsi
+		jz .end
 		mov rdi, [rdi]
 		mov r9, rdi ; r9 = base_ptr
 		mov rcx, rsi ; rcx = comp fct
@@ -41,7 +43,7 @@ segment .text
 				pop rdi
 
 				cmp eax, 0
-				jl .no_swap
+				jz .no_swap
 
 				mov rax, [rsi]
 				mov r8, [rdx]
