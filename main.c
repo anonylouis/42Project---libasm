@@ -302,6 +302,16 @@ int main(int argc, char **argv)
 		char *str23 = calloc(sizeof(char), 2);
 		char *str24 = calloc(sizeof(char), 2);
 		char *str25 = calloc(sizeof(char), 2);
+		if (!str20 || !str21 || !str22 || !str23 || !str24 || !str25)
+		{
+			free(str20);
+			free(str21);
+			free(str22);
+			free(str23);
+			free(str24);
+			free(str25);
+			return (0);
+		}
 		str20[0] = 'a';
 		str21[0] = 'b';
 		str22[0] = 'c';
@@ -325,7 +335,7 @@ int main(int argc, char **argv)
 		ft_list_push_front(&base, str25);
 		print_lst_str(base);
 
-		printf("%s - ft_list_remove_if is_bigger than 8 :%s\n", GREEN, RESET);
+		printf("%s - ft_list_remove_if len equal to 1 :%s\n", GREEN, RESET);
 		ft_list_remove_if(&base, &len_to_remove, len_equal, free);
 		print_lst_str(base);
 
