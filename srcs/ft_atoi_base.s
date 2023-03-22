@@ -6,8 +6,11 @@ segment .text
 	global ft_atoi_base
 	
 	ft_atoi_base:
-		
 		mov rax, 0 ; result
+		test rdi, rdi
+		jz end
+		test rsi, rsi
+		jz end
 		
 		mov r8, 0 ; len_base
 		check_base:

@@ -292,6 +292,8 @@ int main(int argc, char **argv)
 		printf(" - invalid base (space char)  : %d\n", ft_atoi_base("123", "0123 "));
 		printf(" - invalid base (space char)  : %d\n", ft_atoi_base("123", "0123 "));
 		printf(" - invalid base (+ or - char) : %d\n", ft_atoi_base("123", "0123-"));
+		printf(" - null string                : %d\n", ft_atoi_base(NULL, "0123-"));
+		printf(" - null base                  : %d\n", ft_atoi_base("123", NULL));
 
 	}
 	else if (!ft_strcmp(argv[1], "list")) {
