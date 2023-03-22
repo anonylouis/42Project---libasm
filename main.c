@@ -76,7 +76,7 @@ int main(int argc, char **argv)
 	{
 		printf("%sWrong number of arguments\n%s", RED, RESET);
 		printf("Use as %s [function]\n", argv[0]);
-		printf("[function] as ft_strlen, ft_strcpy, ft_strcmp\n");
+		printf("[function] as ft_strlen, ft_strcpy, ft_strcmp, ft_write, ft_read, ft_strdup, ft_atoi_base, list\n");
 		return 1;
 	}
 	if (!ft_strcmp(argv[1], "ft_strlen")) {
@@ -374,7 +374,7 @@ int main(int argc, char **argv)
 	}
 	else {
 		printf("%sNo test for %s %s\n", RED, argv[1], RESET);
-		printf("functions available : ft_strlen, ft_strcpy, ft_strcmp\n");
+		printf("functions available : ft_strlen, ft_strcpy, ft_strcmp, ft_write, ft_read, ft_strdup, ft_atoi_base, list\n");
 		return 1;
 	}
 	return 0;
