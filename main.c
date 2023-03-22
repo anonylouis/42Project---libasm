@@ -49,14 +49,9 @@ int is_bigger(void *a, void *b)
 	return (*((int *)a) < *((int *)b));
 }
 
-int str_comp(void *a, void *b)
+int comp(void *a, void *b)
 {
-	return (ft_strcmp((char *) a, (char *) b) > 0);
-}
-
-int int_comp(void *a, void *b)
-{
-	return (*((int *)a) > *((int *)b));
+	return (*((int *)a) - *((int *)b));
 }
 
 void clear_lst(t_list *base, void (*free_fct)(void *))
@@ -336,7 +331,7 @@ int main(int argc, char **argv)
 
 		
 		printf("%s - ft_list_sort :%s\n", GREEN, RESET);
-		ft_list_sort(&base, str_comp);
+		ft_list_sort(&base, ft_strcmp);
 		print_lst_str(base);
 
 		printf("%s\nWITH NUMBERS :%s\n\n", RED, RESET);
@@ -361,12 +356,12 @@ int main(int argc, char **argv)
 		print_lst_int(base2);
 
 		printf("%s - ft_list_sort :%s\n", GREEN, RESET);
-		ft_list_sort(&base2, int_comp);
+		ft_list_sort(&base2, comp);
 		print_lst_int(base2);
 		
 		//should not crash
 		ft_list_push_front(NULL, "ET UN");
-		ft_list_sort(NULL, int_comp);
+		ft_list_sort(NULL, comp);
 		ft_list_sort(&base2, NULL);
 		ft_list_sort(&base, NULL);
 		ft_list_remove_if(&base, &len_to_remove, NULL, free);

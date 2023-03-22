@@ -43,7 +43,7 @@ segment .text
 				pop rdi
 
 				cmp eax, 0
-				jz .no_swap
+				jl .no_swap
 
 				mov rax, [rsi]
 				mov r8, [rdx]
