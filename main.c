@@ -120,7 +120,7 @@ int main(int argc, char **argv)
 		free(str6);
 	}
 	else if (!ft_strcmp(argv[1], "ft_strcpy")) {
-		printf("%sTEST -- FT_STRCMP %s\n\n", RED, RESET);
+		printf("%sTEST -- FT_STRCPY %s\n\n", RED, RESET);
 
 		char *src1 = "A short sentence";
 		char *src2 = "A longer sentence with the whole alphabet abcdefghijklmnopqrstuvwxyz";
